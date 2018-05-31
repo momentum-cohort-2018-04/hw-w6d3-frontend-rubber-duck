@@ -1,9 +1,5 @@
 # React Photo Search
 
-## Skills
-
- TODO
-
 ## Directions
 
 Build a single-page application that will display images in a gallery-style format like Instagram. Users will be able to search for and view images. Use an image API (two options are suggested in the Resources section) for your images and data. In order to secure your API credentials, [use the built-in support for environment variables](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#adding-custom-environment-variables) and make sure you do not commit your `.env` file.
