@@ -15,7 +15,77 @@ $family-sans-serif: "Helvetica", "Arial", sans-serif;
 // Use the new pink as the primary color
 $primary: $blue;
 $primary-invert: $blue-invert;
+
+.center {
+  margin: 0 auto;
+}
+.full {
+  width: 100%;
+}
+.modal-href a:link{
+  font-style: italic;
+  font-size: .75rem;
+}
+.modal-href a:hover{
+  font-size: .95rem;
+  font-style: normal;
+}
+.modal {
+  color: white;
+  height: auto;
+}
+.float-right
+{float: right;}
+
+.image .modal-image {
+  object-fit: contain;
+  height: 80vh;
+}
+.hero-body{
+  flex-direction: column;
+}
 // 4. Import the rest of Bulma
+.red{
+  // border: red solid 1px;
+  width: 100%;
+  flex-direction: column;
+}
 
+// .pink{
+//   padding: 10px;
+//   border: pink dotted 2px;
+// }
+// .orange{
+//   border: orange solid 2px;
+  // width: 100%;
+  // flex-direction: column;
+// }
 
+// .blue{
+//   border: rgb(5, 8, 218) solid 1px;
+// }
+.green{
+  // border: rgb(2, 201, 78) solid 1px;
+  // background-color: aquamarine;
+  max-height: 10rem;
+  margin: 0 auto;
+  margin-top: 1rem;
+  overflow: hidden;
+}
+.green:hover{
+  max-height: none;
+}
+// @media screen and (max-height: 481px) { // iPad portrait
+//   .modal-image img{
+//     height: 400px;
+//     object-fit: contain;
+//     border: greenyellow 2px solid;
+//   }
+// }
+
+@media screen and (max-width: 481px) { // iPad portrait
+  .green{
+    width: 100%;
+  }
+}
 @import "../node_modules/bulma/bulma";

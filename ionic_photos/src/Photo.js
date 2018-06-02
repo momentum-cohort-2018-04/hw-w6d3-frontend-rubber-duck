@@ -2,11 +2,9 @@ import React, { Component } from 'react'
 
 class Photo extends Component {
   render () {
-    console.log('????????')
     const origArray = this.props.array
     const newArray = origArray.map(function (entry, id) {
       return (
-
         <PhotoModal index={id} entry={entry} array={origArray} key={id} />)
     })
     return newArray
@@ -26,7 +24,6 @@ class PhotoModal extends Component {
     this.setState({open: boolie})
   }
   render () {
-    console.log('WELLLL???!?!?')
     let id = this.props.index
     const entry = this.props.array[id]
     let thumbnail = entry.urls.thumb
@@ -52,30 +49,29 @@ class PhotoModal extends Component {
     if (this.state.open) {
       return (
         <div className='level-item'>
-          <figure className='image is-128x128'>
+          <figure className='image'>
             <img src={thumbnail} alt={description} onClick={this.toggleModal} />
           </figure>
-          <div className='modal is-active'>
-            <div className='modal-background' />
+          <div className='modal is-active blue'>
+            <div className='modal-background' onClick={this.toggleModal} />
             <div className='modal-content'>
               <p className='image'>
-                <img src={regularImage} id={unsplashID} alt={description} />
+                <img className='modal-image' src={regularImage} id={unsplashID} alt={description} />
               </p>
               <ul>
-                <li>Photographed by {photog}</li>
-                <li><small>{photogUN}</small></li>
-                <li><a href={portfolio}>View Portfolio</a></li>
+                <li>Photo by {photog} <small className='float-right'>@{photogUN}</small></li>
                 {photoLocate && <li>Taken in {photoLocate}</li>}
+                <li className='modal-href'><a href={portfolio}>View Portfolio</a></li>
+
               </ul>
             </div>
             <button className='modal-close is-large' aria-label='close' onClick={this.toggleModal} />
           </div>
         </div>)
     } else {
-      console.log('RETURN LIKE A BASIC BITCH')
       return (
-        <div className='level-item'>
-          <figure className='image is-128x128'>
+        <div className='level-item green'>
+          <figure className='image green-img'>
             <img src={thumbnail} alt={description} onClick={this.toggleModal} />
           </figure>
         </div>)
