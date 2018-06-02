@@ -15,6 +15,8 @@ class App extends Component {
     this.submit = this.submit.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.changeType = this.changeType.bind(this)
+    this.importArray = this.importArray.bind(this)
+    this.setType = this.setType.bind(this)
   }
   submit (event) {
     event.preventDefault()
@@ -40,12 +42,17 @@ class App extends Component {
     this.setState({value: event.target.value})
   }
   importArray (newarray) {
+    console.log('CALLED IMPORTARRAY')
     this.setState({array: newarray})
   }
 
   changeType (event) {
     this.setState({type: event.target.innerHTML})
     this.importArray([])
+  }
+  setType (value) {
+    console.log('CALLED SETTYPE')
+    this.setState({type: value})
   }
   componentDidUpdate () { // logs the current status of the state properties
   //   console.log('THIS STATE ARRAY', this.state.array)
@@ -87,7 +94,7 @@ class App extends Component {
               {/* <div className='container pink'> */}
               <div className='level photo_column red'>
                 {/* <Photo array={this.state.array} onClick={}/> */}
-                <Photo array={this.state.array} type={this.state.type} />
+                <Photo array={this.state.array} type={this.state.type} setType={this.setType} setArray={this.importArray} />
               </div>
               {/* </div> */}
             </div>

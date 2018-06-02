@@ -1,9 +1,19 @@
 import React, { Component } from 'react'
+import Unsplash from './Unsplash'
 
 class Photo extends Component {
+  // constructor () {
+  //   super()
+  //   this.setType = this.props.setType.bind(this)
+  //   this.setArray = this.props.setArray.bind(this)
+  // }
   render () {
     // const type = 'Search'
-
+    // changeType={this.changeType} setArray
+    const typeFxn = this.props.setType
+    console.log(typeFxn)
+    const arrayFxn = this.props.setArray
+    console.log('array', arrayFxn)
     const type = this.props.type
     const origArray = this.props.array
     console.log('PROP TYPE', type)
@@ -16,7 +26,8 @@ class Photo extends Component {
     } else if (type === 'Collections' && origArray.length > 0) {
       const newArray = origArray.map(function (entry, id) {
         return (
-          <PhotoCollection index={id} entry={entry} array={origArray} key={id} />)
+          <PhotoCollection index={id} entry={entry} array={origArray} key={id} setType={typeFxn} setArray={arrayFxn} />)
+        // setType={() => { typeFxn }} setArray={arrayFxn}
       })
       return newArray
     } else {
@@ -100,11 +111,21 @@ class PhotoCollection extends Component {
       open: false
     }
     this.toggleModal = this.toggleModal.bind(this)
-    // this.pictureAPI_REQ =
+    this.pictureAPIREQ = this.pictureAPIREQ.bind(this)
   }
   toggleModal () {
     const boolie = !(this.state.open)
     this.setState({open: boolie})
+  }
+
+  pictureAPIREQ (event) {
+    event.preventDefault()
+    const collAPIphotos = this.props.entry.links.photos
+    const newUnsplash = new Unsplash()
+    const newCollection = newUnsplash.collectionPhotoSearch(collAPIphotos)
+    console.log(newCollection)
+    this.props.setArray(newCollection)
+    this.props.setType('Search')
   }
 
   render () {
@@ -149,8 +170,7 @@ class PhotoCollection extends Component {
             <div className='modal-content'>
               <ul>
                 <li className='modal-href float-right'>Collection by <a href={colluserPage}>{colluserName}</a> </li>
-                <li><a href='' ><em>{collTitle}</em></a></li>
-                {/* onClick={this.pictureAPI_REQ} */}
+                <li><a href='' onClick={this.pictureAPIREQ}><em>{collTitle}</em></a></li>
                 <li className='modal-href float-right'><small>@{collUN}</small> | <a href={collUserPortf}>View Portfolio</a></li>
                 <li><i>{collDesc}</i></li>
 
