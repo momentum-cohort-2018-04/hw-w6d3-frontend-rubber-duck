@@ -9,17 +9,30 @@ class App extends Component {
     super()
     this.state = {
       value: '',
-      array: []
+      array: [],
+      type: 'Search'
     }
     this.submit = this.submit.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.changeType = this.changeType.bind(this)
   }
   submit (event) {
     event.preventDefault()
     const photoApi = new Unsplash()
-    photoApi.generalSearch(this.state.value).then(result => {
-      this.importArray(result)
-    })
+    if (this.state.type === 'Search') {
+      photoApi.generalSearch(this.state.value).then(result => {
+        this.importArray(result)
+      })
+    } else if (this.state.type === 'Collections') {
+      let response = photoApi.collectionSearch(this.state.value)
+      this.importArray(response)
+
+      // photoApi.collectionSearch(this.state.value)
+      //   .then(result => {
+      //     console.log('RESULT FROM UNSPASL', result)
+      //     this.importArray(result)
+      //   })
+    } else {}
     console.log('queried!')
   }
 
@@ -30,16 +43,24 @@ class App extends Component {
     this.setState({array: newarray})
   }
 
-  // componentDidUpdate () { // logs the current status of the state properties
+  changeType (event) {
+    this.setState({type: event.target.innerHTML})
+  }
+  componentDidUpdate () { // logs the current status of the state properties
   //   console.log('THIS STATE ARRAY', this.state.array)
-  //   console.log(this.state.value)
-  // }
+    console.log(this.state.type)
+  }
 
   render () {
     return (
       <section className='hero is-light is-fullheight'>
         <div className='hero-head'>
-          <header className='navbar' />
+          <nav className='navbar-brand'>
+            {this.state.type === 'Search' && <a className='navbar-item is-active' onClick={this.changeType}>Search</a>}
+            {this.state.type === 'Collections' && <a className='navbar-item' onClick={this.changeType}>Search</a>}
+            {this.state.type === 'Collections' && <a className='navbar-item is-active' onClick={this.changeType}>Collections</a>}
+            {this.state.type === 'Search' && <a className='navbar-item' onClick={this.changeType}>Collections</a>}
+          </nav>
         </div>
         <div className='hero-body '>
           <section className='level center has-text-centered '>
@@ -65,7 +86,7 @@ class App extends Component {
               {/* <div className='container pink'> */}
               <div className='level photo_column red'>
                 {/* <Photo array={this.state.array} onClick={}/> */}
-                <Photo array={this.state.array} />
+                <Photo array={this.state.array} type={this.state.type} />
               </div>
               {/* </div> */}
             </div>
