@@ -51,7 +51,7 @@ class PhotoModal extends Component {
     let regularImage = entry.urls.regular
     // let likes = entry.likes // 36
     // let userlike = entry.liked_by_user // false
-    let photog = entry.user.name // Danny Feng
+    let photog = convertCase(entry.user.name) // Danny Feng
     let photogUN = entry.user.username // hellodannyfeng
     let portfolio = entry.user.portfolio_url // http://www.hellodannyfeng.com'
     // note there is exif data on the pics (make, model, exposure, aperature, iso)
@@ -100,6 +100,7 @@ class PhotoCollection extends Component {
       open: false
     }
     this.toggleModal = this.toggleModal.bind(this)
+    // this.pictureAPI_REQ =
   }
   toggleModal () {
     const boolie = !(this.state.open)
@@ -107,37 +108,33 @@ class PhotoCollection extends Component {
   }
 
   render () {
-    // console.log('photocollection?')
     // let id = this.props.index
     // const entry = this.props.array[id]
     const entry = this.props.entry
-
     const collID = entry.id // 2148809
-    const collTitle = entry.title // The Architecture Catwalk"
+    const collTitle = convertCase(entry.title) // The Architecture Catwalk"
     const collDesc = entry.description // Buildings looking sharp.
     // curated f , featured, t
     // const colltagsArray = entry.tags
     const collCoverthumb = entry.cover_photo.urls.thumb
 
     const collpreviewArray = entry.preview_photos
-    console.log(collpreviewArray)
+
     const previewPhotos = collpreviewArray.map(function (eachphoto, id) {
       let previewID = eachphoto.id
-      let previewThumb = eachphoto.urls.thumb
+      let previewThumb = eachphoto.urls.small
       return (
-        <div className='column' key={id}>
-          <figure className='image'>
-            <img src={previewThumb} alt={previewID} />
-          </figure>
-        </div>
+        // <div className='column' key={id}>
+        <figure className='image' key={id}>
+          <img src={previewThumb} alt={previewID} />
+        </figure>
+        // </div>
       )
     })
-
     const colluserName = entry.user.name // "Hello I'm Nik"
     const collUN = entry.user.username // "helloimnik"
     const collUserPortf = entry.user.portfolio_url // "https://www.instagram.com/helloimnik_/"
     const colluserPage = entry.user.links.html // https://unsplash.com/@heysupersimi
-    // const collAPI = entry.links.self // https://api.unsplash.com/collections/2148809
     // const collAPIphotos = entry.links.photos // https://api.unsplash.com/collections/2148809/photos
     // const collhtml = entry.links.html // https://unsplash.com/collections/2148809/the-architecture-catwalk
 
@@ -151,12 +148,14 @@ class PhotoCollection extends Component {
             <div className='modal-background' onClick={this.toggleModal} />
             <div className='modal-content'>
               <ul>
-                <li>{collTitle}</li>
-                <li>{collDesc}</li>
-                <li>Collection by <a href={colluserPage}>{colluserName}</a> <small className='float-right'>@{collUN}</small></li>
-                <li className='modal-href'><a href={collUserPortf}>View Portfolio</a></li>
+                <li className='modal-href float-right'>Collection by <a href={colluserPage}>{colluserName}</a> </li>
+                <li><a href='' ><em>{collTitle}</em></a></li>
+                {/* onClick={this.pictureAPI_REQ} */}
+                <li className='modal-href float-right'><small>@{collUN}</small> | <a href={collUserPortf}>View Portfolio</a></li>
+                <li><i>{collDesc}</i></li>
+
               </ul>
-              <div className='columns' >
+              <div className='image-collection'>
                 {previewPhotos}
               </div>
             </div>
@@ -165,15 +164,29 @@ class PhotoCollection extends Component {
         </div>)
     } else {
       return (
-        <div className='level-item green' id={collID}>
-          <h4>{collTitle}</h4>
-          <h5>{collDesc}</h5>
-          <figure className='image green-img'>
-            <img src={collCoverthumb} alt={collTitle} onClick={this.toggleModal} />
-          </figure>
-        </div>)
+        <ul className='collection-preview'>
+          <li><strong>{collTitle}</strong></li>
+          <li><div className='green' id={collID}>
+            <figure className='image'>
+              <img className='green-img' src={collCoverthumb} alt={collTitle} onClick={this.toggleModal} />
+            </figure> </div>
+          </li>
+        </ul>
+      )
     }
   }
+}
+
+function convertCase (string) {
+  let stringArray = string.split(' ')
+  for (var i of stringArray) {
+    var lowercase = i.substr(1).toLowerCase()
+    var uppercase = i.charAt(0).toUpperCase()
+    var newWord = uppercase + lowercase
+    var indexnumb = stringArray.indexOf(i)
+    stringArray.splice(indexnumb, 1, newWord)
+  }
+  return stringArray.join(' ')
 }
 
 export default Photo

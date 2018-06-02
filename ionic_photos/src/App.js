@@ -45,6 +45,7 @@ class App extends Component {
 
   changeType (event) {
     this.setState({type: event.target.innerHTML})
+    this.importArray([])
   }
   componentDidUpdate () { // logs the current status of the state properties
   //   console.log('THIS STATE ARRAY', this.state.array)

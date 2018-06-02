@@ -30,14 +30,45 @@
   width: 100%;
   flex-direction: column; }
 
-.green {
-  max-height: 10rem;
+.image-collection {
+  display: inline-flex;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  height: 45vh;
+  width: 200vw; }
+
+.image-collection .image {
+  height: 100%;
+  width: auto; }
+
+.image-collection .image img {
+  width: auto;
+  height: 100%;
+  object-fit: scale-down;
+  padding-right: .2rem; }
+
+.collection-preview {
+  width: 60vw;
+  text-align: center;
   margin: 0 auto;
-  margin-top: 1rem;
+  margin-top: 2rem;
   overflow: hidden; }
 
+.green {
+  max-height: 15rem;
+  width: auto;
+  margin: 0 auto;
+  overflow: hidden;
+  transition: max-height 0.2s ease;
+  transition-delay: .5s; }
+
 .green:hover {
-  max-height: none; }
+  max-height: 100%; }
+
+.green-img {
+  object-fit: cover;
+  object-position: 0 0; }
 
 @media screen and (max-width: 481px) {
   .green {
