@@ -26,38 +26,32 @@ class App extends Component {
         this.importArray(result)
       })
     } else if (this.state.type === 'Collections') {
-      let response = photoApi.collectionSearch(this.state.value)
-      this.importArray(response)
-
-      // photoApi.collectionSearch(this.state.value)
-      //   .then(result => {
-      //     console.log('RESULT FROM UNSPASL', result)
-      //     this.importArray(result)
-      //   })
+      // let response = photoApi.collectionSearch(this.state.value)
+      // this.importArray(response)
+      photoApi.collectionSearch(this.state.value)
+        .then(result => {
+          this.importArray(result)
+        })
     } else {}
-    console.log('queried!')
   }
 
   handleChange (event) {
     this.setState({value: event.target.value})
   }
   importArray (newarray) {
-    console.log('CALLED IMPORTARRAY')
     this.setState({array: newarray})
   }
-
   changeType (event) {
     this.setState({type: event.target.innerHTML})
     this.importArray([])
   }
   setType (value) {
-    console.log('CALLED SETTYPE')
     this.setState({type: value})
   }
-  componentDidUpdate () { // logs the current status of the state properties
-  //   console.log('THIS STATE ARRAY', this.state.array)
-    console.log(this.state.type)
-  }
+  // componentDidUpdate () { // logs the current status of the state properties
+  // //   console.log('THIS STATE ARRAY', this.state.array)
+  //   console.log(this.state.type)
+  // }
 
   render () {
     return (
@@ -90,13 +84,10 @@ class App extends Component {
             </div>
           </section>
           <section className='level center full'>
-            <div className='level-item orange'>
-              {/* <div className='container pink'> */}
-              <div className='level photo_column red'>
-                {/* <Photo array={this.state.array} onClick={}/> */}
+            <div className='level-item'>
+              <div className='level photo_column'>
                 <Photo array={this.state.array} type={this.state.type} setType={this.setType} setArray={this.importArray} />
               </div>
-              {/* </div> */}
             </div>
           </section>
         </div>

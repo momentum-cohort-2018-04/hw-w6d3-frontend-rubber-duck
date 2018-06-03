@@ -11,12 +11,12 @@ class Unsplash {
     return response
   }
   // request.get(`https://api.unsplash.com/photos/random?count=10`)
+  // https://api.unsplash.com/collections/featured
 
   generalSearch (value) {
     console.log(value)
     return (
       request.get(`https://api.unsplash.com/search/photos/?query=${value}&per_page=20`)
-    // https://api.unsplash.com/collections/featured
         .set('Authorization', 'Bearer ' + token)
         .then(function (response) {
           console.log(response.body.results)
@@ -24,11 +24,10 @@ class Unsplash {
         })
     )
   }
-  /*
+
   collectionSearch (value) {
     return (
       request.get(`https://api.unsplash.com/search/collections/?query=${value}&per_page=20`)
-    // https://api.unsplash.com/collections/featured
         .set('Authorization', 'Bearer ' + token)
         .then(function (response) {
           console.log(response.body.results)
@@ -37,31 +36,33 @@ class Unsplash {
     )
   }
 
-*/
-
+  /*
   collectionSearch (value) {
     // dummy
-    console.log(collectionz)
+    console.log('colls Value', value)
+    // console.log(collectionz)
     return collectionz
   }
-  /*
-  collectionPhotoSearch (value) {
+  */
+
+  collectionPhotoSearch (collectionID) {
     return (
-      request.get(value)
-    // https://api.unsplash.com/collections/featured
+      request.get(`https://api.unsplash.com/collections/${collectionID}/photos`)
         .set('Authorization', 'Bearer ' + token)
         .then(function (response) {
-          console.log(response.body.results)
-          return response.body.results
+          console.log(response)
+          return response.body
         })
     )
-  } */
+  }
 
+/*
   collectionPhotoSearch (value) {
     console.log('col photo s Value', value)
     // dummy
     return (collectionPhotos)
   }
+  */
 }
 
 export default Unsplash

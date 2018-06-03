@@ -4,29 +4,29 @@
 .full {
   width: 100%; }
 
-.modal-href a:link {
-  font-style: italic;
-  font-size: .75rem; }
-
-.modal-href a:hover {
-  font-size: .95rem;
-  font-style: normal; }
-
-.modal {
-  color: white;
-  height: auto; }
-
 .float-right {
   float: right; }
 
+.modal {
+  color: white; }
+  .modal small {
+    font-size: .7rem; }
+
+.modal-href a:link {
+  font-size: .95rem; }
+
+.modal-href a:hover {
+  font-size: 1rem;
+  font-weight: bold; }
+
 .image .modal-image {
   object-fit: contain;
-  height: 80vh; }
+  max-height: 75vh; }
 
 .hero-body {
   flex-direction: column; }
 
-.red {
+.photo_column {
   width: 100%;
   flex-direction: column; }
 
@@ -37,16 +37,14 @@
   white-space: nowrap;
   height: 45vh;
   width: 200vw; }
-
-.image-collection .image {
-  height: 100%;
-  width: auto; }
-
-.image-collection .image img {
-  width: auto;
-  height: 100%;
-  object-fit: scale-down;
-  padding-right: .2rem; }
+  .image-collection .image {
+    height: 100%;
+    width: auto; }
+  .image-collection .image img {
+    width: auto;
+    height: 100%;
+    object-fit: scale-down;
+    padding-right: .2rem; }
 
 .collection-preview {
   width: 60vw;
@@ -55,24 +53,34 @@
   margin-top: 2rem;
   overflow: hidden; }
 
-.green {
+.preview {
   max-height: 15rem;
   width: auto;
   margin: 0 auto;
   overflow: hidden;
   transition: max-height 0.2s ease;
   transition-delay: .5s; }
+  .preview-img {
+    object-fit: cover;
+    object-position: 0 0; }
 
-.green:hover {
+.preview:hover {
   max-height: 100%; }
 
-.green-img {
-  object-fit: cover;
-  object-position: 0 0; }
-
 @media screen and (max-width: 481px) {
-  .green {
+  .preview {
     width: 100%; } }
+
+@media screen and (min-width: 700px) and (max-width: 950px) {
+  .modal-content {
+    margin: 0 auto;
+    padding-left: 6%;
+    padding-right: 6%; } }
+
+@media screen and (min-width: 950px) {
+  .modal-content {
+    padding-left: 15%;
+    padding-right: 15%; } }
 
 /*! bulma.io v0.7.1 | MIT License | github.com/jgthms/bulma */
 @keyframes spinAround {
@@ -3980,8 +3988,8 @@ a.dropdown-item {
 
 .modal-content,
 .modal-card {
-  margin: 0 20px;
-  max-height: calc(100vh - 160px);
+  margin: 0 15px;
+  max-height: calc(100vh - 0px);
   overflow: auto;
   position: relative;
   width: 100%; }
@@ -3990,7 +3998,7 @@ a.dropdown-item {
     .modal-card {
       margin: 0 auto;
       max-height: calc(100vh - 40px);
-      width: 640px; } }
+      width: 100vw; } }
 
 .modal-close {
   background: none;

@@ -2,21 +2,12 @@ import React, { Component } from 'react'
 import Unsplash from './Unsplash'
 
 class Photo extends Component {
-  // constructor () {
-  //   super()
-  //   this.setType = this.props.setType.bind(this)
-  //   this.setArray = this.props.setArray.bind(this)
-  // }
   render () {
-    // const type = 'Search'
-    // changeType={this.changeType} setArray
     const typeFxn = this.props.setType
-    console.log(typeFxn)
     const arrayFxn = this.props.setArray
-    console.log('array', arrayFxn)
     const type = this.props.type
     const origArray = this.props.array
-    console.log('PROP TYPE', type)
+
     if (type === 'Search' && origArray.length > 0) {
       const newArray = origArray.map(function (entry, id) {
         return (
@@ -27,7 +18,6 @@ class Photo extends Component {
       const newArray = origArray.map(function (entry, id) {
         return (
           <PhotoCollection index={id} entry={entry} array={origArray} key={id} setType={typeFxn} setArray={arrayFxn} />)
-        // setType={() => { typeFxn }} setArray={arrayFxn}
       })
       return newArray
     } else {
@@ -77,9 +67,9 @@ class PhotoModal extends Component {
           <figure className='image'>
             <img src={thumbnail} alt={description} onClick={this.toggleModal} />
           </figure>
-          <div className='modal is-active blue'>
+          <div className='modal is-active'>
             <div className='modal-background' onClick={this.toggleModal} />
-            <div className='modal-content'>
+            <div className='modal-content '>
               <p className='image'>
                 <img className='modal-image' src={regularImage} id={unsplashID} alt={description} />
               </p>
@@ -95,8 +85,8 @@ class PhotoModal extends Component {
         </div>)
     } else {
       return (
-        <div className='level-item green'>
-          <figure className='image green-img'>
+        <div className='level-item preview'>
+          <figure className='image preview-img'>
             <img src={thumbnail} alt={description} onClick={this.toggleModal} />
           </figure>
         </div>)
@@ -120,17 +110,20 @@ class PhotoCollection extends Component {
 
   pictureAPIREQ (event) {
     event.preventDefault()
-    const collAPIphotos = this.props.entry.links.photos
+    // const collAPIphotos = this.props.entry.links.photos
+    const justID = this.props.entry.id
     const newUnsplash = new Unsplash()
-    const newCollection = newUnsplash.collectionPhotoSearch(collAPIphotos)
-    console.log(newCollection)
-    this.props.setArray(newCollection)
-    this.props.setType('Search')
+    const prop = this.props
+    // const newCollection = newUnsplash.collectionPhotoSearch(collAPIphotos)
+    newUnsplash.collectionPhotoSearch(justID)
+      .then(function (response) {
+        prop.setArray([])
+        prop.setType('Search')
+        prop.setArray(response)
+      })
   }
 
   render () {
-    // let id = this.props.index
-    // const entry = this.props.array[id]
     const entry = this.props.entry
     const collID = entry.id // 2148809
     const collTitle = convertCase(entry.title) // The Architecture Catwalk"
@@ -138,26 +131,22 @@ class PhotoCollection extends Component {
     // curated f , featured, t
     // const colltagsArray = entry.tags
     const collCoverthumb = entry.cover_photo.urls.thumb
-
     const collpreviewArray = entry.preview_photos
-
-    const previewPhotos = collpreviewArray.map(function (eachphoto, id) {
-      let previewID = eachphoto.id
-      let previewThumb = eachphoto.urls.small
-      return (
-        // <div className='column' key={id}>
-        <figure className='image' key={id}>
-          <img src={previewThumb} alt={previewID} />
-        </figure>
-        // </div>
-      )
-    })
     const colluserName = entry.user.name // "Hello I'm Nik"
     const collUN = entry.user.username // "helloimnik"
     const collUserPortf = entry.user.portfolio_url // "https://www.instagram.com/helloimnik_/"
     const colluserPage = entry.user.links.html // https://unsplash.com/@heysupersimi
     // const collAPIphotos = entry.links.photos // https://api.unsplash.com/collections/2148809/photos
-    // const collhtml = entry.links.html // https://unsplash.com/collections/2148809/the-architecture-catwalk
+
+    const previewPhotos = collpreviewArray.map(function (eachphoto, id) {
+      let previewID = eachphoto.id
+      let previewThumb = eachphoto.urls.small
+      return (
+        <figure className='image' key={id}>
+          <img src={previewThumb} alt={previewID} />
+        </figure>
+      )
+    })
 
     if (this.state.open) {
       return (
@@ -165,13 +154,13 @@ class PhotoCollection extends Component {
           <figure className='image'>
             <img src={collCoverthumb} alt={collTitle} onClick={this.toggleModal} />
           </figure>
-          <div className='modal is-active blue'>
+          <div className='modal is-active'>
             <div className='modal-background' onClick={this.toggleModal} />
             <div className='modal-content'>
               <ul>
-                <li className='modal-href float-right'>Collection by <a href={colluserPage}>{colluserName}</a> </li>
-                <li><a href='' onClick={this.pictureAPIREQ}><em>{collTitle}</em></a></li>
-                <li className='modal-href float-right'><small>@{collUN}</small> | <a href={collUserPortf}>View Portfolio</a></li>
+                <li className='modal-href float-right'><small>Collection by</small> <a href={colluserPage}>{colluserName}</a> </li>
+                <li><a href='' onClick={this.pictureAPIREQ}><b>{collTitle}</b></a></li>
+                <li className='modal-href float-right'><small>@{collUN}</small> | <a href={collUserPortf}><small>View Portfolio</small></a></li>
                 <li><i>{collDesc}</i></li>
 
               </ul>
