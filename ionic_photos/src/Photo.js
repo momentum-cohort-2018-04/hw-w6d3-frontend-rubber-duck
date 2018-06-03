@@ -41,7 +41,8 @@ class PhotoModal extends Component {
   render () {
     let id = this.props.index
     const entry = this.props.array[id]
-    let thumbnail = entry.urls.thumb
+    let thumbnail = entry.urls.small
+    // let thumbnail = entry.urls.thumb
     let description
     if (entry.description) {
       description = entry.description
@@ -67,17 +68,16 @@ class PhotoModal extends Component {
           <figure className='image'>
             <img src={thumbnail} alt={description} onClick={this.toggleModal} />
           </figure>
-          <div className='modal is-active'>
+          <div className='modal is-active red'>
             <div className='modal-background' onClick={this.toggleModal} />
-            <div className='modal-content '>
+            <div className='modal-content'>
               <p className='image'>
                 <img className='modal-image' src={regularImage} id={unsplashID} alt={description} />
               </p>
-              <ul>
+              <ul className='modal-words'>
                 <li>Photo by {photog} <small className='float-right'>@{photogUN}</small></li>
                 {photoLocate && <li>Taken in {photoLocate}</li>}
                 <li className='modal-href'><a href={portfolio}>View Portfolio</a></li>
-
               </ul>
             </div>
             <button className='modal-close is-large' aria-label='close' onClick={this.toggleModal} />

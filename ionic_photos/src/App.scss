@@ -74,15 +74,15 @@ $modal-content-spacing-mobile: 0px;
 
 .collection-preview {
   width: 60vw;
-  text-align: center;
+  text-align: center; 
   margin: 0 auto;
   margin-top: 2rem;
   overflow: hidden;
 }
 
 .preview {
-  max-height: 15rem;
-  width:auto;
+  max-height: 10rem;
+  width:75vw;
   margin: 0 auto;
   overflow: hidden;
   transition: max-height 0.2s ease;
@@ -96,35 +96,47 @@ $modal-content-spacing-mobile: 0px;
   max-height: 100%;
 }
 
-// @media screen and (max-height: 481px) { // iPad portrait
-//   .modal-image img{
-//     height: 400px;
-//     object-fit: contain;
-//     border: greenyellow 2px solid;
-//   }
-// }
-
-@media screen and (max-width: 481px) {
-  .preview{
-    width: 100%;
-  }
-}
-@media screen and (min-width: 700px) and (max-width: 950px) {
-
-  .modal-content {
-    margin: 0 auto;
-    padding-left: 6%;
-    padding-right: 6%;
-  }
+.red {
+  padding: 5px;
+  border: red solid 2px;
+  width:auto;
 }
 
-@media screen and (min-width: 950px) { // iPad portrait
-  $modal-content-width: 100vw;
-  // $modal-content-margin: 50px;
-  // $modal-content-spacing: 20px;
-  .modal-content {
-    padding-left: 15%;
-    padding-right: 15%;
+.purple {
+  padding: 5px;
+  border: purple solid 2px;
+  width: auto;
+}
+.modal_content {
+  padding-left: 20%;
+  padding-right: 20%;
+}
+@media screen and (min-width: 500px) {
+  .preview {
+    max-height: 100%;
+    max-width: 50vw;
+    margin: 1rem auto;
+    &-img{
+          width: 100%;
+          height: 100%;
+          object-fit: scale-down;
+          overflow: hidden;
+        }
+  }
+}
+
+@media screen and (min-width: 855px) and (max-width: 1020px){ // iPad portrait
+  .modal-words{
+    margin:0 auto;
+    max-width: 80vw;
+  }
+  
+}
+
+@media screen and (min-width: 1020px) and (max-width: 1440px){ // iPad portrait
+  .modal-words{
+    margin:0 auto;
+    max-width: 50vw;
   }
 }
 

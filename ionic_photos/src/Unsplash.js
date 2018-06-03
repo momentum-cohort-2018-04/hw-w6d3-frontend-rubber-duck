@@ -1,8 +1,8 @@
 import request from 'superagent'
 import {} from 'dotenv/config'
 import response from './Testpull'
-import collectionz from './Collections'
-import collectionPhotos from './Collection_photos'
+// import collectionz from './Collections'
+// import collectionPhotos from './Collection_photos'
 const token = process.env.REACT_APP_ACCESS_TOKEN
 
 class Unsplash {
