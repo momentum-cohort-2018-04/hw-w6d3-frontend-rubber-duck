@@ -22,16 +22,18 @@ class App extends Component {
     event.preventDefault()
     const photoApi = new Unsplash()
     if (this.state.type === 'Search') {
-      photoApi.generalSearch(this.state.value).then(result => {
-        this.importArray(result)
-      })
+      let response = photoApi.dummyReturn(this.state.value)
+      this.importArray(response)
+      // photoApi.generalSearch(this.state.value).then(result => {
+      //   this.importArray(result)
+      // })
     } else if (this.state.type === 'Collections') {
-      // let response = photoApi.collectionSearch(this.state.value)
-      // this.importArray(response)
-      photoApi.collectionSearch(this.state.value)
-        .then(result => {
-          this.importArray(result)
-        })
+      let response = photoApi.dummycollectionSearch(this.state.value)
+      this.importArray(response)
+      // photoApi.collectionSearch(this.state.value)
+      //   .then(result => {
+      //     this.importArray(result)
+      //   })
     } else {}
   }
 

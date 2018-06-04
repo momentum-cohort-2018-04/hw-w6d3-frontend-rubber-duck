@@ -40,21 +40,21 @@ class PhotoModal extends Component {
   }
   likePhoto (event) {
     const photoID = event.target.id
-    const newUnsplash = new Unsplash()
+    const photoApi = new Unsplash()
     const array = this.props.array
     const arrayUpdate = this.props.setArray
     const itemIndex = Number(event.target.dataset.index)
-    newUnsplash.likePhoto(photoID)
+    photoApi.likePhoto(photoID)
     array[itemIndex].liked_by_user = true
     arrayUpdate(array)
   }
   unlikePhoto (event) {
     const photoID = event.target.id
-    const newUnsplash = new Unsplash()
+    const photoApi = new Unsplash()
     const array = this.props.array
     const arrayUpdate = this.props.setArray
     const itemIndex = Number(event.target.dataset.index)
-    newUnsplash.unlikePhoto(photoID)
+    photoApi.unlikePhoto(photoID)
     array[itemIndex].liked_by_user = false
     arrayUpdate(array)
   }
@@ -133,14 +133,20 @@ class PhotoCollection extends Component {
   pictureAPIREQ (event) {
     event.preventDefault()
     const justID = this.props.entry.id
-    const newUnsplash = new Unsplash()
+    const photoApi = new Unsplash()
     const prop = this.props
-    newUnsplash.collectionPhotoSearch(justID)
-      .then(function (response) {
-        prop.setArray([])
-        prop.setType('Search')
-        prop.setArray(response)
-      })
+
+    let response = photoApi.dummycollectionPhotoSearch(justID)
+    prop.setArray([])
+    prop.setType('Search')
+    prop.setArray(response)
+
+    // photoApi.collectionPhotoSearch(justID)
+    //   .then(function (response) {
+    //     prop.setArray([])
+    //     prop.setType('Search')
+    //     prop.setArray(response)
+    //   })
   }
 
   render () {

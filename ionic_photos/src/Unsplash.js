@@ -1,9 +1,8 @@
 import request from 'superagent'
 import {} from 'dotenv/config'
 import response from './Testpull'
-import { error } from 'util'
-// import collectionz from './Collections'
-// import collectionPhotos from './Collection_photos'
+import collectionz from './Collections'
+import collectionPhotos from './Collection_photos'
 const token = process.env.REACT_APP_ACCESS_TOKEN
 
 class Unsplash {
@@ -18,10 +17,6 @@ class Unsplash {
     return (
       request.get(`https://api.unsplash.com/search/photos/?query=${value}&per_page=20`)
         .set('Authorization', 'Bearer ' + token)
-        // .on('error', function (error) {
-        //   console.log('Error: ', error)
-        //   return {problem: error}
-        // })
         .then(function (response) {
           console.log(response.body.results)
           return response.body.results
@@ -29,25 +24,23 @@ class Unsplash {
     )
   }
 
-  collectionSearch (value) {
-    return (
-      request.get(`https://api.unsplash.com/search/collections/?query=${value}&per_page=20`)
-        .set('Authorization', 'Bearer ' + token)
-        .then(function (response) {
-          console.log(response.body.results)
-          return response.body.results
-        })
-    )
-  }
+  // collectionSearch (value) {
+  //   return (
+  //     request.get(`https://api.unsplash.com/search/collections/?query=${value}&per_page=20`)
+  //       .set('Authorization', 'Bearer ' + token)
+  //       .then(function (response) {
+  //         console.log(response.body.results)
+  //         return response.body.results
+  //       })
+  //   )
+  // }
 
-  /*
-  collectionSearch (value) {
+  dummycollectionSearch (value) {
     // dummy
     console.log('colls Value', value)
     // console.log(collectionz)
     return collectionz
   }
-  */
 
   collectionPhotoSearch (collectionID) {
     return (
@@ -60,13 +53,11 @@ class Unsplash {
     )
   }
 
-  /*
-  collectionPhotoSearch (value) {
+  dummycollectionPhotoSearch (value) {
     console.log('col photo s Value', value)
     // dummy
     return (collectionPhotos)
   }
-  */
 
   likePhoto (photoid) {
     return (
