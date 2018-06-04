@@ -75,7 +75,7 @@ class App extends Component {
             <div className='level-item '>
               <form onSubmit={this.submit} className='field has-addons'>
                 <div className='control'>
-                  <input className='input' type='text' value={this.state.value} onChange={this.handleChange} placeholder='Text input' />
+                  <input className='input' type='text' value={this.state.value} onChange={this.handleChange} placeholder='Photo Subject Search' />
                 </div>
                 <div className='control'>
                   <button className='button is-primary' >Search</button>
