@@ -64,15 +64,15 @@ class App extends Component {
             {this.state.type === 'Search' && <a className='navbar-item' onClick={this.changeType}>Collections</a>}
           </nav>
         </div>
-        <div className='hero-body '>
-          <section className='level center has-text-centered '>
+        <div className='hero-body'>
+          <section className='level center has-text-centered'>
             <div className='level-item'>
-              <h1 className='title'>Title</h1>
+              <h1 className='title'>PhotoDiving</h1>
             </div>
             <div className='level-item'>
-              <h2 className='subtitle'>Subtitle</h2>
+              <h2 className='subtitle'>Look, I'm bad at</h2>
             </div>
-            <div className='level-item'>
+            <div className='level-item '>
               <form onSubmit={this.submit} className='field has-addons'>
                 <div className='control'>
                   <input className='input' type='text' value={this.state.value} onChange={this.handleChange} placeholder='Text input' />

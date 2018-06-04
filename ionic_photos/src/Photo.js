@@ -11,7 +11,7 @@ class Photo extends Component {
     if (type === 'Search' && origArray.length > 0) {
       const newArray = origArray.map(function (entry, id) {
         return (
-          <PhotoModal index={id} entry={entry} array={origArray} key={id} />)
+          <PhotoModal index={id} entry={entry} array={origArray} key={id} setArray={arrayFxn} />)
       })
       return newArray
     } else if (type === 'Collections' && origArray.length > 0) {
@@ -38,6 +38,26 @@ class PhotoModal extends Component {
     const boolie = !(this.state.open)
     this.setState({open: boolie})
   }
+  likePhoto (event) {
+    const photoID = event.target.id
+    const newUnsplash = new Unsplash()
+    const array = this.props.array
+    const arrayUpdate = this.props.setArray
+    const itemIndex = Number(event.target.dataset.index)
+    newUnsplash.likePhoto(photoID)
+    array[itemIndex].liked_by_user = true
+    arrayUpdate(array)
+  }
+  unlikePhoto (event) {
+    const photoID = event.target.id
+    const newUnsplash = new Unsplash()
+    const array = this.props.array
+    const arrayUpdate = this.props.setArray
+    const itemIndex = Number(event.target.dataset.index)
+    newUnsplash.unlikePhoto(photoID)
+    array[itemIndex].liked_by_user = false
+    arrayUpdate(array)
+  }
   render () {
     let id = this.props.index
     const entry = this.props.array[id]
@@ -52,7 +72,7 @@ class PhotoModal extends Component {
     let unsplashID = entry.id
     let regularImage = entry.urls.regular
     // let likes = entry.likes // 36
-    // let userlike = entry.liked_by_user // false
+    let userlike = entry.liked_by_user // false
     let photog = convertCase(entry.user.name) // Danny Feng
     let photogUN = entry.user.username // hellodannyfeng
     let portfolio = entry.user.portfolio_url // http://www.hellodannyfeng.com'
@@ -72,8 +92,10 @@ class PhotoModal extends Component {
             <div className='modal-background' onClick={this.toggleModal} />
             <div className='modal-content'>
               <p className='image'>
-                <img className='modal-image' src={regularImage} id={unsplashID} alt={description} />
+                {!userlike && <img className='modal-image' onDoubleClick={(event) => this.likePhoto(event)} src={regularImage} id={unsplashID} data-index={id} alt={description} />}
+                {userlike && <img className='modal-image' onDoubleClick={(event) => this.unlikePhoto(event)} src={regularImage} id={unsplashID} data-index={id} alt={description} />}
               </p>
+              {userlike && <div className='favorite' />}
               <ul className='modal-words'>
                 <li>Photo by {photog} <small className='float-right'>@{photogUN}</small></li>
                 {photoLocate && <li>Taken in {photoLocate}</li>}
@@ -110,11 +132,9 @@ class PhotoCollection extends Component {
 
   pictureAPIREQ (event) {
     event.preventDefault()
-    // const collAPIphotos = this.props.entry.links.photos
     const justID = this.props.entry.id
     const newUnsplash = new Unsplash()
     const prop = this.props
-    // const newCollection = newUnsplash.collectionPhotoSearch(collAPIphotos)
     newUnsplash.collectionPhotoSearch(justID)
       .then(function (response) {
         prop.setArray([])
@@ -137,7 +157,6 @@ class PhotoCollection extends Component {
     const collUserPortf = entry.user.portfolio_url // "https://www.instagram.com/helloimnik_/"
     const colluserPage = entry.user.links.html // https://unsplash.com/@heysupersimi
     // const collAPIphotos = entry.links.photos // https://api.unsplash.com/collections/2148809/photos
-
     const previewPhotos = collpreviewArray.map(function (eachphoto, id) {
       let previewID = eachphoto.id
       let previewThumb = eachphoto.urls.small
@@ -162,7 +181,6 @@ class PhotoCollection extends Component {
                 <li><a href='' onClick={this.pictureAPIREQ}><b>{collTitle}</b></a></li>
                 <li className='modal-href float-right'><small>@{collUN}</small> | <a href={collUserPortf}><small>View Portfolio</small></a></li>
                 <li><i>{collDesc}</i></li>
-
               </ul>
               <div className='image-collection'>
                 {previewPhotos}
