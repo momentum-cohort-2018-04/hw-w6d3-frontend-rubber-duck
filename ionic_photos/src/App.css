@@ -84,7 +84,7 @@
   padding-right: 20%; }
 
 .favorite {
-  background-image: url("./iconmonstr-favorite-7-240.png");
+  background-image: url("./iconmonstr-favorite-1-240.png");
   height: 30px;
   width: 30px;
   background-repeat: none;
@@ -93,6 +93,9 @@
   top: 15vh;
   left: 10vw;
   z-index: 99999999; }
+
+.nomargin {
+  margin: 0; }
 
 @media screen and (min-width: 500px) {
   .preview {

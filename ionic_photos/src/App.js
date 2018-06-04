@@ -70,7 +70,7 @@ class App extends Component {
               <h1 className='title'>PhotoDiving</h1>
             </div>
             <div className='level-item'>
-              <h2 className='subtitle'>Look, I'm bad at</h2>
+              <h2 className='subtitle'>Naming things is hard</h2>
             </div>
             <div className='level-item '>
               <form onSubmit={this.submit} className='field has-addons'>

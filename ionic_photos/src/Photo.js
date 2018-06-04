@@ -88,7 +88,7 @@ class PhotoModal extends Component {
           <figure className='image'>
             <img src={thumbnail} alt={description} onClick={this.toggleModal} />
           </figure>
-          <div className='modal is-active red'>
+          <div className='modal is-active'>
             <div className='modal-background' onClick={this.toggleModal} />
             <div className='modal-content'>
               <p className='image'>
@@ -150,7 +150,8 @@ class PhotoCollection extends Component {
     const collDesc = entry.description // Buildings looking sharp.
     // curated f , featured, t
     // const colltagsArray = entry.tags
-    const collCoverthumb = entry.cover_photo.urls.thumb
+    // const collCoverthumb = entry.cover_photo.urls.thumb
+    const collCoverthumb = entry.cover_photo.urls.small
     const collpreviewArray = entry.preview_photos
     const colluserName = entry.user.name // "Hello I'm Nik"
     const collUN = entry.user.username // "helloimnik"
@@ -193,9 +194,9 @@ class PhotoCollection extends Component {
       return (
         <ul className='collection-preview'>
           <li><strong>{collTitle}</strong></li>
-          <li><div className='green' id={collID}>
+          <li><div className='preview' id={collID}>
             <figure className='image'>
-              <img className='green-img' src={collCoverthumb} alt={collTitle} onClick={this.toggleModal} />
+              <img className='preview-img' src={collCoverthumb} alt={collTitle} onClick={this.toggleModal} />
             </figure> </div>
           </li>
         </ul>

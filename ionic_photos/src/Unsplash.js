@@ -1,7 +1,7 @@
 import request from 'superagent'
 import {} from 'dotenv/config'
 import response from './Testpull'
-import { error } from 'util'
+// import { error } from 'util'
 // import collectionz from './Collections'
 // import collectionPhotos from './Collection_photos'
 const token = process.env.REACT_APP_ACCESS_TOKEN
@@ -16,7 +16,7 @@ class Unsplash {
 
   generalSearch (value) {
     return (
-      request.get(`https://api.unsplash.com/search/photos/?query=${value}&per_page=20`)
+      request.get(`https://api.unsplash.com/search/photos/?query=${value}&per_page=35`)
         .set('Authorization', 'Bearer ' + token)
         // .on('error', function (error) {
         //   console.log('Error: ', error)
@@ -31,7 +31,7 @@ class Unsplash {
 
   collectionSearch (value) {
     return (
-      request.get(`https://api.unsplash.com/search/collections/?query=${value}&per_page=20`)
+      request.get(`https://api.unsplash.com/search/collections/?query=${value}&per_page=35`)
         .set('Authorization', 'Bearer ' + token)
         .then(function (response) {
           console.log(response.body.results)
