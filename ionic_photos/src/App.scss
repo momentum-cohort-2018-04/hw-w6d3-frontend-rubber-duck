@@ -1,0 +1,162 @@
+@charset "utf-8";
+
+@import "../node_modules/bulma/sass/utilities/initial-variables";
+
+$blue: #06bcef;
+$pink: #ff8080;
+$blue-invert: #f6f9fd;
+$family-sans-serif: "Helvetica", "Arial", sans-serif;
+
+$primary: $blue;
+$primary-invert: $blue-invert;
+
+$modal-content-width: 100vw;
+$modal-content-margin-mobile: 15px;
+$modal-content-spacing-mobile: 0px;
+
+
+.center {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+.full {
+  width: 100%;
+}
+.float-right
+{float: right;}
+
+
+.modal {
+  color: white;
+  & small {
+    font-size: .7rem;
+  }
+}
+.modal-href {
+  & a:link{
+    font-size: .95rem;
+  }
+  & a:hover{
+    font-size: 1rem;
+    font-weight: bold;
+  }
+} 
+
+.image .modal-image {
+  object-fit: contain;
+  max-height: 75vh;
+}
+.hero-body{
+  flex-direction: column;
+}
+
+.photo_column {
+  width: 100%;
+  flex-direction: column;
+}
+.image-collection {
+  display: inline-flex;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  height: 45vh;
+  width: 200vw;
+  & .image {
+    height: 100%;
+    width:auto;
+  }
+  & .image img{
+    width: auto;
+    height: 100%;
+    object-fit: scale-down;
+    padding-right: .2rem;
+  }
+}
+
+.collection-preview {
+  width: 60vw;
+  text-align: center; 
+  margin: 0 auto;
+  margin-top: 2rem;
+  overflow: hidden;
+}
+
+.preview {
+  max-height: 10rem;
+  width:75vw;
+  margin: 0 auto;
+  overflow: hidden;
+  transition: max-height 0.2s ease;
+  transition-delay: .5s;
+  &-img{
+    object-fit: cover;
+    object-position: 0 0;
+  }
+}
+.preview:hover {
+  max-height: 100%;
+}
+
+.red {
+  padding: 5px;
+  border: red solid 2px;
+  width:auto;
+}
+
+.purple {
+  padding: 5px;
+  border: purple solid 2px;
+  width: auto;
+}
+.modal_content {
+  padding-left: 20%;
+  padding-right: 20%;
+}
+
+.favorite{
+  // background-image: url('./iconmonstr-favorite-7-240.png');
+  background-image: url('./iconmonstr-favorite-1-240.png');
+  height: 30px;
+  width: 30px;
+  background-repeat: none;
+  background-size: contain;
+  position: fixed;
+  top: 15vh;
+  left: 10vw;
+  z-index: 99999999;
+}
+
+.nomargin{
+  margin: 0;
+}
+@media screen and (min-width: 500px) {
+  .preview {
+    max-height: 15rem;
+    max-width: 50vw;
+    margin: 1rem auto;
+    &-img{
+          width: 100%;
+          height: 100%;
+          object-fit: scale-down;
+          overflow: hidden;
+        }
+  }
+}
+
+@media screen and (min-width: 855px) and (max-width: 1020px){ // iPad portrait
+  .modal-words{
+    margin:0 auto;
+    max-width: 80vw;
+  }
+  
+}
+
+@media screen and (min-width: 1020px) and (max-width: 1440px){ // iPad portrait
+  .modal-words{
+    margin:0 auto;
+    max-width: 50vw;
+  }
+}
+
+@import "../node_modules/bulma/bulma";
