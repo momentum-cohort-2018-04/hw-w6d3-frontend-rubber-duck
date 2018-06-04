@@ -15,6 +15,8 @@ class App extends Component {
     this.submit = this.submit.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.changeType = this.changeType.bind(this)
+    this.importArray = this.importArray.bind(this)
+    this.setType = this.setType.bind(this)
   }
   submit (event) {
     event.preventDefault()
@@ -24,16 +26,13 @@ class App extends Component {
         this.importArray(result)
       })
     } else if (this.state.type === 'Collections') {
-      let response = photoApi.collectionSearch(this.state.value)
-      this.importArray(response)
-
-      // photoApi.collectionSearch(this.state.value)
-      //   .then(result => {
-      //     console.log('RESULT FROM UNSPASL', result)
-      //     this.importArray(result)
-      //   })
+      // let response = photoApi.collectionSearch(this.state.value)
+      // this.importArray(response)
+      photoApi.collectionSearch(this.state.value)
+        .then(result => {
+          this.importArray(result)
+        })
     } else {}
-    console.log('queried!')
   }
 
   handleChange (event) {
@@ -42,15 +41,17 @@ class App extends Component {
   importArray (newarray) {
     this.setState({array: newarray})
   }
-
   changeType (event) {
     this.setState({type: event.target.innerHTML})
     this.importArray([])
   }
-  componentDidUpdate () { // logs the current status of the state properties
-  //   console.log('THIS STATE ARRAY', this.state.array)
-    console.log(this.state.type)
+  setType (value) {
+    this.setState({type: value})
   }
+  // componentDidUpdate () { // logs the current status of the state properties
+  // //   console.log('THIS STATE ARRAY', this.state.array)
+  //   console.log(this.state.type)
+  // }
 
   render () {
     return (
@@ -63,15 +64,15 @@ class App extends Component {
             {this.state.type === 'Search' && <a className='navbar-item' onClick={this.changeType}>Collections</a>}
           </nav>
         </div>
-        <div className='hero-body '>
-          <section className='level center has-text-centered '>
+        <div className='hero-body'>
+          <section className='level center has-text-centered'>
             <div className='level-item'>
-              <h1 className='title'>Title</h1>
+              <h1 className='title'>PhotoDiving</h1>
             </div>
             <div className='level-item'>
-              <h2 className='subtitle'>Subtitle</h2>
+              <h2 className='subtitle'>Look, I'm bad at</h2>
             </div>
-            <div className='level-item'>
+            <div className='level-item '>
               <form onSubmit={this.submit} className='field has-addons'>
                 <div className='control'>
                   <input className='input' type='text' value={this.state.value} onChange={this.handleChange} placeholder='Text input' />
@@ -83,13 +84,10 @@ class App extends Component {
             </div>
           </section>
           <section className='level center full'>
-            <div className='level-item orange'>
-              {/* <div className='container pink'> */}
-              <div className='level photo_column red'>
-                {/* <Photo array={this.state.array} onClick={}/> */}
-                <Photo array={this.state.array} type={this.state.type} />
+            <div className='level-item'>
+              <div className='level photo_column'>
+                <Photo array={this.state.array} type={this.state.type} setType={this.setType} setArray={this.importArray} />
               </div>
-              {/* </div> */}
             </div>
           </section>
         </div>
